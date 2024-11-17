@@ -56,10 +56,6 @@ class MainActivity : AppCompatActivity() {
                     viewModel.deleteById(event.id)
                 }
 
-                override fun onEditClicked(event: Event) {
-                    viewModel.findById(event.id)
-                }
-
             }
         )
 
