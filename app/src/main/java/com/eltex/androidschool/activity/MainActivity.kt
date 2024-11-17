@@ -57,11 +57,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onEditClicked(event: Event) {
-                    val intent = Intent(this, EditEventActivity::class.java).apply {
-                        putExtra("EVENT_ID", event.id)
-                        putExtra("EVENT_CONTENT", event.content)
-                    }
-                    launcher.launch(intent)
+                    viewModel.findById(event.id)
                 }
 
             }

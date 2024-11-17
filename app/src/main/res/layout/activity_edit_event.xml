@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.NewEventActivity">
+    tools:context=".activity.EditEventActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -20,7 +20,6 @@
         android:background="?colorPrimary"
         app:titleTextColor="?colorOnPrimary"
         app:title="@string/edit_event" />
-
 
     <EditText
         android:id="@+id/content"
@@ -37,5 +36,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:text="@tools:sample/lorem[20]" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
