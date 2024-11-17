@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Android School</string>
+    <string name="hello_eltex">Hello Eltex!</string>
+    <string name="not_implemented">Not implemented</string>
+    <string name="new_event">New event</string>
+    <string name="save_event">Save event</string>
+    <string name="text_is_empty">Text is empty</string>
+    <string name="event_hint">Enter event description</string>
+    <string name="delete_event">Delete event</string>
+    <string name="app_not_found">App not found</string>
+    <string name="edit_event">Edit event</string>
+</resources>

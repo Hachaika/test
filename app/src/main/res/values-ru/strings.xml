@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android Школа</string>
+    <string name="hello_eltex">Привет, Eltex!</string>
+    <string name="not_implemented">Не реализовано</string>
+    <string name="app_not_found">Приложение не найдено</string>
+    <string name="new_event">Новое событие</string>
+    <string name="save_event">Сохранить событие</string>
+    <string name="text_is_empty">Текст пустой</string>
+    <string name="event_hint">Введите описание события</string>
+    <string name="delete_event">Удалить событие</string>
+</resources>
