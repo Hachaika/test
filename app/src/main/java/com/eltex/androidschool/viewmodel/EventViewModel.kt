@@ -2,6 +2,7 @@ package com.eltex.androidschool.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.eltex.androidschool.data.Event
 import com.eltex.androidschool.repository.EventRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -41,5 +42,9 @@ class EventViewModel(private val repository: EventRepository) : ViewModel() {
 
     fun deleteById(id: Long) {
         repository.deleteById(id)
+    }
+
+    fun editById(id: Long, updatedEvent: Event) {
+            repository.editById(id, updatedEvent)
     }
 }

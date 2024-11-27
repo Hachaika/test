@@ -15,4 +15,6 @@ interface EventRepository {
 
     fun addEvent(content: String)
 
+    fun editById(id: Long, updatedEvent: Event)
+
 }

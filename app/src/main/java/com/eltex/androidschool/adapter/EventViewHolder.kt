@@ -1,5 +1,7 @@
 package com.eltex.androidschool.adapter
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.eltex.androidschool.data.Event
 import com.eltex.androidschool.databinding.CardEventBinding
@@ -43,5 +45,13 @@ class EventViewHolder(private val binding: CardEventBinding) : ViewHolder(bindin
         binding.participants.isSelected = participatedByMe
         binding.participants.text = if (participatedByMe) "1" else "0"
 
+        // Анимация участия
+        val translationY = if (participatedByMe) 10f else -10f
+
+        val animator = ObjectAnimator.ofFloat(binding.participants, "translationY", translationY)
+        animator.duration = 300
+        animator.repeatCount = 1
+        animator.repeatMode = ValueAnimator.REVERSE
+        animator.start()
     }
 }

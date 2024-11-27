@@ -21,6 +21,11 @@ class NewEventActivity : AppCompatActivity() {
 
         EdgeToEdgeHelper.enableEdgeToEdge(findViewById(android.R.id.content))
 
+        val sharedText = intent.getStringExtra("SHARED_TEXT")
+        if (!sharedText.isNullOrBlank()) {
+            binding.content.setText(sharedText)
+        }
+
         binding.toolbar.menu.findItem(R.id.save_event).setOnMenuItemClickListener {
             val content = binding.content.text?.toString().orEmpty()
 

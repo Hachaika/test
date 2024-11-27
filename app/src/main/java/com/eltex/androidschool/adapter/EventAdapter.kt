@@ -18,6 +18,7 @@ class EventAdapter(
         fun onParticipateClicked (event: Event)
         fun onShareClicked (event: Event)
         fun onDeleteClicked (event: Event)
+        fun onEditClicked(event: Event)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -48,6 +49,11 @@ class EventAdapter(
                             listener.onDeleteClicked(getItem(viewHolder.adapterPosition))
                             true
                         }
+
+                        R.id.edit_event -> {
+                            listener.onEditClicked(getItem(viewHolder.adapterPosition))
+                            true
+                        }
                         else -> false
                     }
                 }
@@ -58,6 +64,7 @@ class EventAdapter(
 
         return viewHolder
     }
+
 
     override fun onBindViewHolder(
         holder: EventViewHolder,

@@ -6,36 +6,36 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.eltex.androidschool.R
+import com.eltex.androidschool.data.Event
 import com.eltex.androidschool.databinding.ActivityEditEventBinding
 import com.eltex.androidschool.ui.EdgeToEdgeHelper
+import dev.ahmedmourad.bundlizer.bundle
+import dev.ahmedmourad.bundlizer.unbundle
 
 class EditEventActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityEditEventBinding
-    private var eventId: Long = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
 
-        binding = ActivityEditEventBinding.inflate(layoutInflater)
+        val binding = ActivityEditEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         EdgeToEdgeHelper.enableEdgeToEdge(findViewById(android.R.id.content))
 
-        eventId = intent.getLongExtra("EVENT_ID", -1)
-        val currentContent = intent.getStringExtra("EVENT_CONTENT") ?: ""
-        binding.content.setText(currentContent)
+        val event = requireNotNull(intent.extras?.unbundle(Event.serializer()))
+
+        binding.content.setText(event.content)
 
         binding.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.save_event -> {
-                    val content = binding.content.text?.toString ().orEmpty()
+                    val content = binding.content.text?.toString().orEmpty()
 
                     if (content.isNotBlank()) {
                         val resultIntent = Intent().apply {
-                            putExtra("EVENT_ID", eventId)
-                            putExtra("NEW_EVENT_CONTENT", content)
+                            putExtras(event.copy(content = content).bundle(Event.serializer()))
                         }
                         setResult(RESULT_OK, resultIntent)
                         finish()
@@ -44,6 +44,7 @@ class EditEventActivity : AppCompatActivity() {
                     }
                     true
                 }
+
                 else -> false
             }
         }
