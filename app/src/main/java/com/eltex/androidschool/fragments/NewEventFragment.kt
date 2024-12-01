@@ -31,6 +31,7 @@ class NewEventFragment : Fragment() {
 
     companion object {
         const val EVENT_ID = "EVENT_ID"
+        const val ARG_CONTENT = "ARG_CONTENT"
     }
 
     override fun onCreateView(
@@ -42,12 +43,11 @@ class NewEventFragment : Fragment() {
         val toolbarViewModel by activityViewModels<ToolbarViewModel>()
 
         val eventId = arguments?.getLong(EVENT_ID) ?: 0L
+        val eventContent = arguments?.getString(ARG_CONTENT)
 
-        val newEventViewModel by viewModels<NewEventViewModel>{
+        val newEventViewModel by viewModels<NewEventViewModel> {
             viewModelFactory {
-                addInitializer(
-                    NewEventViewModel::class,
-                ) {
+                addInitializer(NewEventViewModel::class) {
                     NewEventViewModel(
                         repository = SqliteEventRepository(
                             dao = AppDb.getInstance(requireContext().applicationContext).eventDao
@@ -58,7 +58,12 @@ class NewEventFragment : Fragment() {
             }
         }
 
-        toolbarViewModel.saveClicked.filter { it }
+        if (eventContent != null) {
+            binding.content.setText(eventContent)
+        }
+
+        toolbarViewModel.saveClicked
+            .filter { it }
             .onEach {
                 val content = binding.content.text?.toString().orEmpty()
 
@@ -66,8 +71,7 @@ class NewEventFragment : Fragment() {
                     newEventViewModel.save(content)
                     findNavController().navigateUp()
                 } else {
-                    Toast.makeText(requireContext(), R.string.text_is_empty, Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(requireContext(), R.string.text_is_empty, Toast.LENGTH_SHORT).show()
                 }
 
                 toolbarViewModel.onSaveClicked(false)
@@ -80,11 +84,9 @@ class NewEventFragment : Fragment() {
                     when (event) {
                         Lifecycle.Event.ON_START -> toolbarViewModel.setSaveVisible(true)
                         Lifecycle.Event.ON_STOP -> toolbarViewModel.setSaveVisible(false)
-                        Lifecycle.Event.ON_DESTROY -> source.lifecycle.removeObserver(this)
                         else -> Unit
                     }
                 }
-
             }
         )
 

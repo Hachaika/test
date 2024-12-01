@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity.RESULT_OK
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.navigation.fragment.findNavController
 import com.eltex.androidschool.R
 import com.eltex.androidschool.activity.EditEventActivity
 import com.eltex.androidschool.adapter.EventAdapter
@@ -69,26 +71,14 @@ class EventsFragment : Fragment() {
                 }
 
                 override fun onEditClicked(event: Event) {
-                    editEventLauncher.launch(
-                        Intent(
-                            requireContext(),
-                            EditEventActivity::class.java
-                        ).apply {
-                            putExtras(event.bundle(Event.serializer()))
-                        })
+                    findNavController().navigate(
+                        R.id.action_eventsFragment_to_newEventFragment,
+                        bundleOf(
+                            NewEventFragment.EVENT_ID to event.id,
+                            NewEventFragment.ARG_CONTENT to event.content
+                        )
+                    )
                 }
-
-                val editEventLauncher =
-                    registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                        if (result.resultCode == RESULT_OK) {
-                            val data = result.data
-                            val event = data?.extras?.unbundle(Event.serializer())
-                            if (event != null) {
-                                viewModel.editById(event.id, event)
-                            }
-                        }
-                    }
-
             }
         )
 
