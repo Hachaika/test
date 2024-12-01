@@ -9,4 +9,8 @@
     <string name="delete_event">Delete event</string>
     <string name="app_not_found">App not found</string>
     <string name="edit_event">Edit event</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bottom_menu_posts">Posts</string>
+    <string name="bottom_menu_events">Events</string>
+    <string name="bottom_menu_users">Users</string>
 </resources>

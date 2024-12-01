@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/postsFragment"
+        android:icon="@drawable/ic_rss_feed_24"
+        android:title="@string/bottom_menu_posts" />
+
+    <item
+        android:id="@+id/eventsFragment"
+        android:icon="@drawable/ic_event_24"
+        android:title="@string/bottom_menu_events" />
+
+    <item
+        android:id="@+id/usersFragment"
+        android:icon="@drawable/ic_part_filled"
+        android:title="@string/bottom_menu_users" />
+
+</menu>

@@ -13,8 +13,8 @@ interface EventRepository {
 
     fun deleteById(id: Long)
 
-    fun addEvent(content: String)
-
     fun editById(id: Long, updatedEvent: Event)
+
+    fun save(content: String, id: Long)
 
 }
